@@ -16,6 +16,9 @@
 		C3D270371CE5CB00000BB8D6 /* FoodTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D270361CE5CB00000BB8D6 /* FoodTrackerUITests.swift */; };
 		C3D270451CE64C2C000BB8D6 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D270441CE64C2C000BB8D6 /* RatingControl.swift */; };
 		C3D270471CE6550D000BB8D6 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = C3D270461CE6550D000BB8D6 /* README.md */; };
+		C3D270491CE66814000BB8D6 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D270481CE66814000BB8D6 /* Meal.swift */; };
+		C3D2704A1CE66814000BB8D6 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D270481CE66814000BB8D6 /* Meal.swift */; };
+		C3D2704B1CE66814000BB8D6 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D270481CE66814000BB8D6 /* Meal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,7 @@
 		C3D270381CE5CB00000BB8D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3D270441CE64C2C000BB8D6 /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		C3D270461CE6550D000BB8D6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C3D270481CE66814000BB8D6 /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,7 @@
 				C3D2701F1CE5CB00000BB8D6 /* LaunchScreen.storyboard */,
 				C3D270221CE5CB00000BB8D6 /* Info.plist */,
 				C3D270441CE64C2C000BB8D6 /* RatingControl.swift */,
+				C3D270481CE66814000BB8D6 /* Meal.swift */,
 			);
 			path = FoodTracker;
 			sourceTree = "<group>";
@@ -265,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3D270491CE66814000BB8D6 /* Meal.swift in Sources */,
 				C3D270191CE5CB00000BB8D6 /* ViewController.swift in Sources */,
 				C3D270451CE64C2C000BB8D6 /* RatingControl.swift in Sources */,
 				C3D270471CE6550D000BB8D6 /* README.md in Sources */,
@@ -276,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3D2704A1CE66814000BB8D6 /* Meal.swift in Sources */,
 				C3D2702C1CE5CB00000BB8D6 /* FoodTrackerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3D2704B1CE66814000BB8D6 /* Meal.swift in Sources */,
 				C3D270371CE5CB00000BB8D6 /* FoodTrackerUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

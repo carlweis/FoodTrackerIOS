@@ -20,8 +20,6 @@ class RatingControl: UIView {
     let spacing = 5
     let stars = 5
     
-    
-
     // MARK: Initialization
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
