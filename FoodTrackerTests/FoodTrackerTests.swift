@@ -17,16 +17,15 @@ class FoodTrackerTests: XCTestCase {
     func testMealInitialization() {
         
         // Success case.
-        let potentialItem = Meal(name: "Newest meal", photo: nil, rating: 5)
+        let potentialItem = Meal(name: "Newest meal", photo: nil, rating: 5, review: "This was the best meal ever!!!")
         XCTAssertNotNil(potentialItem)
         
         // Failure case.
-        let noName = Meal(name: "", photo: nil, rating: 0)
+        let noName = Meal(name: "", photo: nil, rating: 0, review: "")
         XCTAssertNil(noName, "Empty name is invalid")
         
-        let badRating = Meal(name: "Really bad rating", photo: nil, rating: -1)
+        let badRating = Meal(name: "Really bad rating", photo: nil, rating: -1, review: "")
         XCTAssertNil(badRating, "Negative ratings are invalid, be positive")
-        
     }
     
 }

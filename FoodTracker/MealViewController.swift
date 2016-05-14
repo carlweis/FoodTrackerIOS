@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MealViewController.swift
 //  FoodTracker
 //
 //  Created by Carl Weis on 5/13/16.
@@ -8,14 +8,21 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate,
+class MealViewController: UIViewController, UITextFieldDelegate,
                       UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: Properties
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var mealNameLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var ratingControl: RatingControl!
+    @IBOutlet weak var reviewTextField: UITextField!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    /*
+     This value is either passed by `MealTableViewController` in `prepareForSeque(_:sender:)`
+     or constructed as part of adding a new meal.
+    */
+    var meal: Meal?
     
     
     // MARK: Overrides
@@ -40,7 +47,7 @@ class ViewController: UIViewController, UITextFieldDelegate,
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        mealNameLabel.text = textField.text
+        
     }
     
     // MARK: UIImagePickerControllerDelegate
@@ -58,6 +65,21 @@ class ViewController: UIViewController, UITextFieldDelegate,
         
         // Dismiss the image picker
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: Navigation
+    
+    // This method lets you configure a view controller before it's presented.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if saveButton === sender {
+            let name = nameTextField.text ?? ""
+            let photo = photoImageView.image
+            let rating = ratingControl.rating
+            let review = reviewTextField.text ?? ""
+            
+            // Set the meal to be passed to the MealTableViewController after the unwind seque.
+            meal = Meal(name: name, photo: photo, rating: rating, review: review)
+        }
     }
     
     // MARK: Actions
