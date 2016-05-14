@@ -34,9 +34,17 @@ class MealViewController: UIViewController, UITextFieldDelegate,
         nameTextField.delegate = self
         reviewTextField.delegate = self
         
+        // Set up views if editing an existing Meal.
+        if let meal = meal {
+            navigationItem.title = meal.name
+            nameTextField.text = meal.name
+            reviewTextField.text = meal.review
+            photoImageView.image = meal.photo
+            ratingControl.rating = meal.rating
+        }
+        
         // Enable the Save button only if the text field has a valid Meal name and review.
         checkValidMealName()
-        checkValidMealReview()
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,7 +100,14 @@ class MealViewController: UIViewController, UITextFieldDelegate,
     
     // MARK: Navigation
     @IBAction func cancel(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
+        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+        let isPresentingInAddMealMode = presentingViewController is UINavigationController
+        
+        if isPresentingInAddMealMode {
+            dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            navigationController!.popViewControllerAnimated(true)
+        }
     }
     
     // This method lets you configure a view controller before it's presented.
