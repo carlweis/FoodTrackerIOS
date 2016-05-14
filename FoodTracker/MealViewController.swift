@@ -32,6 +32,11 @@ class MealViewController: UIViewController, UITextFieldDelegate,
         
         // Handle the text field's user input through delegate callbacks.
         nameTextField.delegate = self
+        reviewTextField.delegate = self
+        
+        // Enable the Save button only if the text field has a valid Meal name and review.
+        checkValidMealName()
+        checkValidMealReview()
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,8 +51,26 @@ class MealViewController: UIViewController, UITextFieldDelegate,
         return true
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        // Disable the Save button while editing
+        saveButton.enabled = false
+    }
     func textFieldDidEndEditing(textField: UITextField) {
-        
+        checkValidMealName()
+        checkValidMealReview()
+        navigationItem.title = nameTextField.text
+    }
+    
+    func checkValidMealName() {
+        // Disable the Save button if the name text field is empty
+        let name = nameTextField.text ?? ""
+        saveButton.enabled = !name.isEmpty
+    }
+    
+    func checkValidMealReview() {
+        // Disable the Save button if the review text field is empty
+        let review = reviewTextField.text ?? ""
+        saveButton.enabled = !review.isEmpty
     }
     
     // MARK: UIImagePickerControllerDelegate
@@ -68,6 +91,9 @@ class MealViewController: UIViewController, UITextFieldDelegate,
     }
     
     // MARK: Navigation
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     // This method lets you configure a view controller before it's presented.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
