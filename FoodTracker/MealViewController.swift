@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class MealViewController: UIViewController, UITextFieldDelegate,
                       UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -17,6 +18,8 @@ class MealViewController: UIViewController, UITextFieldDelegate,
     @IBOutlet weak var ratingControl: RatingControl!
     @IBOutlet weak var reviewTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     
     /*
      This value is either passed by `MealTableViewController` in `prepareForSeque(_:sender:)`
@@ -36,11 +39,16 @@ class MealViewController: UIViewController, UITextFieldDelegate,
         
         // Set up views if editing an existing Meal.
         if let meal = meal {
+            shareButton.enabled = true
+            shareButton.tintColor = UIColor(red:1,  green:0.267,  blue:0.216, alpha:1)
             navigationItem.title = meal.name
             nameTextField.text = meal.name
             reviewTextField.text = meal.review
             photoImageView.image = meal.photo
             ratingControl.rating = meal.rating
+        } else {
+            shareButton.enabled = false
+            shareButton.tintColor = UIColor.clearColor()
         }
         
         // Enable the Save button only if the text field has a valid Meal name and review.
@@ -124,6 +132,21 @@ class MealViewController: UIViewController, UITextFieldDelegate,
     }
     
     // MARK: Actions
+    
+    @IBAction func shareOnFacebook(sender: AnyObject) {
+        if (SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)) {
+            let facebookMessageComposer: SLComposeViewController =
+            SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            facebookMessageComposer.setInitialText("\(nameTextField.text)\n\(reviewTextField.text)\nRating \(ratingControl.rating)/5")
+            facebookMessageComposer.addURL(NSURL(string: "http://carlweis.com"))
+            facebookMessageComposer.addImage(photoImageView.image)
+            self.presentViewController(facebookMessageComposer, animated: true, completion: nil)
+        } else {
+            let facebookNotConfiguredAlert = UIAlertController(title: "Facebook Not Configured", message: "Please setup a facebook account", preferredStyle: .Alert)
+            facebookNotConfiguredAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self.presentViewController(facebookNotConfiguredAlert, animated: true, completion: nil)
+        }
+    }
     
     @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
         // Hide the keyboard

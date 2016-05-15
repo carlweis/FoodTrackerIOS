@@ -20,6 +20,7 @@
 		C3D2704B1CE66814000BB8D6 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D270481CE66814000BB8D6 /* Meal.swift */; };
 		C3D2704D1CE6768B000BB8D6 /* MealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2704C1CE6768B000BB8D6 /* MealTableViewCell.swift */; };
 		C3D2704F1CE67B34000BB8D6 /* MealTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2704E1CE67B34000BB8D6 /* MealTableViewController.swift */; };
+		C3E3FAEC1CE6E57800ADA329 /* GradientHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E3FAEB1CE6E57800ADA329 /* GradientHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		C3D270481CE66814000BB8D6 /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		C3D2704C1CE6768B000BB8D6 /* MealTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewCell.swift; sourceTree = "<group>"; };
 		C3D2704E1CE67B34000BB8D6 /* MealTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewController.swift; sourceTree = "<group>"; };
+		C3E3FAEB1CE6E57800ADA329 /* GradientHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 		C3D270151CE5CB00000BB8D6 /* FoodTracker */ = {
 			isa = PBXGroup;
 			children = (
+				C3E3FAEB1CE6E57800ADA329 /* GradientHeaderView.swift */,
 				C3D270161CE5CB00000BB8D6 /* AppDelegate.swift */,
 				C3D270181CE5CB00000BB8D6 /* MealViewController.swift */,
 				C3D2701A1CE5CB00000BB8D6 /* Main.storyboard */,
@@ -276,6 +279,7 @@
 				C3D270491CE66814000BB8D6 /* Meal.swift in Sources */,
 				C3D270191CE5CB00000BB8D6 /* MealViewController.swift in Sources */,
 				C3D270451CE64C2C000BB8D6 /* RatingControl.swift in Sources */,
+				C3E3FAEC1CE6E57800ADA329 /* GradientHeaderView.swift in Sources */,
 				C3D270171CE5CB00000BB8D6 /* AppDelegate.swift in Sources */,
 				C3D2704F1CE67B34000BB8D6 /* MealTableViewController.swift in Sources */,
 				C3D2704D1CE6768B000BB8D6 /* MealTableViewCell.swift in Sources */,
@@ -507,6 +511,7 @@
 				C3D2703D1CE5CB00000BB8D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C3D2703E1CE5CB01000BB8D6 /* Build configuration list for PBXNativeTarget "FoodTrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +520,7 @@
 				C3D270401CE5CB01000BB8D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C3D270411CE5CB01000BB8D6 /* Build configuration list for PBXNativeTarget "FoodTrackerUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +529,7 @@
 				C3D270431CE5CB01000BB8D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

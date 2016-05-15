@@ -18,11 +18,17 @@ class MealTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.backgroundColor = UIColor(red:0.949,  green:0.949,  blue:0.949, alpha:1)
+        
         // Use the edit button item provided by the table view controller
         navigationItem.leftBarButtonItem = editButtonItem()
         
-        // Load the sample data
-        loadSampleMeals()
+        if let savedMeals = loadMeals() {
+            meals += savedMeals
+        } else {
+            // Load the sample data
+            loadSampleMeals()
+        }
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -33,10 +39,27 @@ class MealTableViewController: UITableViewController {
         return meals.count
     }
     
+    
+//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as! MealTableViewCell
+//        selectedCell.contentView.backgroundColor = UIColor(red:0.996,  green:0.135,  blue:0.303, alpha:1)
+//        selectedCell.contentView.tintColor = UIColor.whiteColor()
+//        selectedCell.nameLabel.textColor = UIColor.whiteColor()
+//        selectedCell.reviewLabel.textColor = UIColor.whiteColor()
+//    }
+//    
+//    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+//        let cellToDeSelect = tableView.cellForRowAtIndexPath(indexPath) as! MealTableViewCell
+//        cellToDeSelect.contentView.backgroundColor = UIColor.clearColor()
+//        cellToDeSelect.nameLabel.textColor = UIColor.darkTextColor()
+//        cellToDeSelect.reviewLabel.textColor = UIColor.darkTextColor()
+//    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cellIdentifier = "MealTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MealTableViewCell
+        
         let meal = meals[indexPath.row]
         
         // Configure the cell
@@ -59,11 +82,38 @@ class MealTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = UIColor.clearColor()
+    }
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
-            meals.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+            // Show an alert to ask the user to confirm the delete
+            let title = "Delete \(meals[indexPath.row].name)?"
+            let message = "Are you sure you want to delete this meal?"
+            var confirmAlert: UIAlertController
+        
+            // if ipad
+            if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Pad {
+                confirmAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            } else {
+                confirmAlert = UIAlertController(title: title, message: message, preferredStyle: .ActionSheet)
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            confirmAlert.addAction(cancelAction)
+            
+            let deleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: { (action) -> Void in
+                // Delete the row from the data source
+                self.meals.removeAtIndex(indexPath.row)
+                self.saveMeals()
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            })
+            confirmAlert.addAction(deleteAction)
+            // present the alert controller
+            presentViewController(confirmAlert, animated: true, completion: nil)
+            
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array and add a new row to the talbe view.
         }
@@ -105,6 +155,8 @@ class MealTableViewController: UITableViewController {
                 meals.append(meal)
                 tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
             }
+            // Save the meals.
+            saveMeals()
         }
     }
     
@@ -121,5 +173,19 @@ class MealTableViewController: UITableViewController {
         let meal3 = Meal(name: "Pasta with Meatballs", photo: photo3, rating: 3, review: "Not my favorite, but it was good.")!
         
         meals += [meal1, meal2, meal3]
+    }
+    
+    
+    // MARK: NSCoding
+    
+    func saveMeals() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(meals, toFile: Meal.ArchiveURL.path!)
+        if !isSuccessfulSave {
+            print("Failed to save meals...")
+        }
+    }
+    
+    func loadMeals() -> [Meal]? {
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(Meal.ArchiveURL.path!) as? [Meal]
     }
 }
